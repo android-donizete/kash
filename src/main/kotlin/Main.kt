@@ -16,22 +16,28 @@ class SingleProducerWrapper<T>(
     }
 }
 
+class FactoryProducerWrapper<T>(
+    private val producer: Producer<T>
+): ProducerWrapper<T> {
+    override fun get(): T = producer()
+}
+
 class Module {
     val hashMap = hashMapOf<KClass<*>, ProducerWrapper<*>>()
 
     inline fun <reified T> single(noinline producer: Producer<T>) {
         hashMap[T::class] = SingleProducerWrapper(producer)
     }
+
+    inline fun <reified T> factory(noinline producer: Producer<T>) {
+        hashMap[T::class] = FactoryProducerWrapper(producer)
+    }
 }
 
 class Kash {
     val hashMap = hashMapOf<KClass<*>, ProducerWrapper<*>>()
 
-    fun module(module: Module) {
-        module.hashMap.forEach {(key, value) ->
-            hashMap[key] = value
-        }
-    }
+    fun module(module: Module) = hashMap.putAll(module.hashMap)
 
     inline fun <reified T> get(): T = hashMap[T::class]!!.get() as T
 }
@@ -48,9 +54,16 @@ class Car {
     }
 }
 
+class Engine {
+    operator fun invoke() {
+        println("Vrummmmmm!!!")
+    }
+}
+
 fun main(args: Array<String>) {
     val module = module {
         single { Car() }
+        factory { Engine() }
     }
 
     val kash = startKash {
@@ -65,5 +78,15 @@ fun main(args: Array<String>) {
 
     if (car1 === car2) {
         println("I've got the same car!!!")
+    }
+
+    val engine1 = kash.get<Engine>()
+    val engine2 = kash.get<Engine>()
+
+    engine1()
+    engine2()
+
+    if (engine1 !== engine2) {
+        println("I've got a new engine!!!")
     }
 }
