@@ -1,35 +1,35 @@
 import kotlin.reflect.KClass
 
 class Kash {
-    private val hashMap = hashMapOf<KClass<*>, ProducerWrapper<*>>()
-    private val hashSet = linkedSetOf<KClass<*>>()
+    private val dependencies = hashMapOf<KClass<*>, ProducerWrapper<*>>()
+    private val history = linkedSetOf<KClass<*>>()
 
-    fun module(moduleBuilder: ModuleBuilder) {
+    fun module(moduleBuilder: Builder<Module>) {
         val module = Module(this)
         moduleBuilder(module)
-        hashMap.putAll(module.hashMap)
+        dependencies.putAll(module.dependencies)
     }
 
     fun <T : Any> get(kClass: KClass<T>): T {
-        if (kClass in hashSet) {
+        if (kClass in history) {
             error(
             """
                 We have found a recursive dependency
                 Please revise your dependencies:
-                ${beautyDependencies(kClass)}
+                ${beautyHistory(kClass)}
             """
             )
         }
-        hashSet += kClass
-        val producer = hashMap[kClass] ?: throw Throwable("$kClass not found")
+        history += kClass
+        val producer = dependencies[kClass] ?: throw Throwable("$kClass not found")
         val clazz = producer.get() as T
-        hashSet -= kClass
+        history -= kClass
         return clazz
     }
 
-    private fun beautyDependencies(kClass: KClass<*>): String {
+    private fun beautyHistory(kClass: KClass<*>): String {
         val builder = StringBuilder()
-        hashSet.forEach {
+        history.forEach {
             builder.append("${it.simpleName} -> ")
         }
         builder.append("${kClass.simpleName}")
