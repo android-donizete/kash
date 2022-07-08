@@ -1,7 +1,7 @@
 import kotlin.reflect.KClass
 
 class Kash {
-    private val dependencies = hashMapOf<KClass<*>, ProducerWrapper<*>>()
+    private val dependencies = hashMapOf<KClass<*>, Producer<*>>()
     private val history = linkedSetOf<KClass<*>>()
 
     fun module(moduleBuilder: Builder<Module>) {
@@ -22,7 +22,7 @@ class Kash {
         }
         history += kClass
         val producer = dependencies[kClass] ?: throw Throwable("$kClass not found")
-        val clazz = producer.get() as T
+        val clazz = producer() as T
         history -= kClass
         return clazz
     }

@@ -1,3 +1,4 @@
+typealias Producer<T> = () -> T
 typealias Builder<T> = T.() -> Unit
 
 fun startKash(builder: Builder<Kash>): Kash =

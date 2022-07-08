@@ -3,34 +3,33 @@ class Car(
 ) {
     operator fun invoke() {
         println("I get a car!!!")
+        println("I'll turn on engine: ")
+        engine()
     }
 }
 
-class Engine(
-    private val another: Another
-) {
+class Engine {
     operator fun invoke() {
         println("Vrummmmmm!!!")
     }
 }
 
-class Another(
-    private val car: Car
-)
-
 fun main(args: Array<String>) {
-    val module = module {
-        factory { Engine(get()) }
+    val module1 = module {
+        factory { Engine() }
+    }
+
+    val module2 = module {
         single { Car(get()) }
-        factory { Another(get()) }
     }
 
     val kash = startKash {
-        module(module)
+        module(module1)
+        module(module2)
     }
 
     val car1 = kash.get<Car>()
-    val car2: Car = kash.get()
+    val car2 = kash.get<Car>()
 
     car1()
     car2()
