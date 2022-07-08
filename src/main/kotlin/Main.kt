@@ -1,54 +1,13 @@
-import kotlin.reflect.KClass
+typealias Builder<T> = T.() -> Unit
 
-typealias Producer<T> = () -> T
-
-interface ProducerWrapper<T> {
-    fun get(): T
-}
-
-class SingleProducerWrapper<T>(
-    private val producer: Producer<T>
-): ProducerWrapper<T> {
-    private var cached: T? = null
-
-    override fun get(): T = cached ?: producer().also {
-        cached = it
-    }
-}
-
-class FactoryProducerWrapper<T>(
-    private val producer: Producer<T>
-): ProducerWrapper<T> {
-    override fun get(): T = producer()
-}
-
-class Module {
-    val hashMap = hashMapOf<KClass<*>, ProducerWrapper<*>>()
-
-    inline fun <reified T> single(noinline producer: Producer<T>) {
-        hashMap[T::class] = SingleProducerWrapper(producer)
-    }
-
-    inline fun <reified T> factory(noinline producer: Producer<T>) {
-        hashMap[T::class] = FactoryProducerWrapper(producer)
-    }
-}
-
-class Kash {
-    val hashMap = hashMapOf<KClass<*>, ProducerWrapper<*>>()
-
-    fun module(module: Module) = hashMap.putAll(module.hashMap)
-
-    inline fun <reified T> get(): T = hashMap[T::class]!!.get() as T
-}
-
-fun startKash(builder: Kash.() -> Unit): Kash =
+fun startKash(builder: Builder<Kash>): Kash =
     Kash().apply(builder)
 
-fun module(builder: Module.() -> Unit): Module =
-    Module().apply(builder)
+fun module(builder: Builder<Module>) = builder
 
-class Car {
+class Car(
+    private val engine: Engine
+) {
     operator fun invoke() {
         println("I get a car!!!")
     }
@@ -62,8 +21,8 @@ class Engine {
 
 fun main(args: Array<String>) {
     val module = module {
-        single { Car() }
         factory { Engine() }
+        single { Car(get()) }
     }
 
     val kash = startKash {
