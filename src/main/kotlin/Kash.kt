@@ -14,7 +14,7 @@ class Kash {
         if (kClass in history) {
             error(
             """
-                We have found a recursive dependency
+                We have found a circular dependency.
                 Please revise your dependencies:
                 ${beautyHistory(kClass)}
             """
