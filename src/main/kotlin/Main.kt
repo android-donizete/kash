@@ -16,11 +16,11 @@ class Engine {
 
 fun main(args: Array<String>) {
     val module1 = module {
-        factory { Engine() }
+        factoryOf(::Engine)
     }
 
     val module2 = module {
-        single { Car(get()) }
+        singleOf(::Car)
     }
 
     val kash = startKash {
