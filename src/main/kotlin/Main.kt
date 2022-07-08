@@ -15,17 +15,16 @@ class Engine {
 }
 
 fun main(args: Array<String>) {
-    val module1 = module {
-        factoryOf(::Engine)
-    }
-
     val module2 = module {
         singleOf(::Car)
     }
 
+    val module1 = module {
+        factoryOf(::Engine)
+    }
+
     val kash = startKash {
-        module(module1)
-        module(module2)
+        modules(module1, module2)
     }
 
     val car1 = kash<Car>()
