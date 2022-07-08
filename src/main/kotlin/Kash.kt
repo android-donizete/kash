@@ -1,12 +1,9 @@
 import kotlin.reflect.KClass
 
-class Kash {
-    private val producers = hashMapOf<KClass<*>, Producer<*>>()
-    private val history = linkedSetOf<KClass<*>>()
+class MutableKash : Kash() {
+    fun module(builder: Builder<MutableKash>) = builder(this)
 
-    fun module(builder: Builder<Kash>) = builder(this)
-
-    fun modules(vararg builders: Builder<Kash>) = builders.forEach(::module)
+    fun modules(vararg builders: Builder<MutableKash>) = builders.forEach(::module)
 
     inline fun <reified T : Any> single(
         noinline producer: Producer<T>
@@ -48,12 +45,17 @@ class Kash {
         noinline fn: Function3<A, B, C, T>,
     ) = push { fn(get(), get(), get()) }
 
-    inline fun <reified T : Any> push(noinline producer: Producer<T>) =
-        push(T::class, producer)
+    inline fun <reified T : Any> push(noinline producer: Producer<T>) = push(T::class, producer)
 
     fun <T : Any> push(clazz: KClass<T>, producer: Producer<T>) {
         producers[clazz] = producer
     }
+}
+
+abstract class Kash {
+    protected val producers = hashMapOf<KClass<*>, Producer<*>>()
+
+    private val history = linkedSetOf<KClass<*>>()
 
     inline operator fun <reified T : Any> invoke(): T = get()
 
@@ -76,11 +78,10 @@ class Kash {
         return dependency
     }
 
-    private fun history(clazz: KClass<*>): String =
-        StringBuilder().apply {
-            history.forEach {
-                append("${it.simpleName} -> ")
-            }
-            append("${clazz.simpleName}")
-        }.toString()
+    private fun history(clazz: KClass<*>) = StringBuilder().apply {
+        history.forEach {
+            append("${it.simpleName} -> ")
+        }
+        append("${clazz.simpleName}")
+    }.toString()
 }

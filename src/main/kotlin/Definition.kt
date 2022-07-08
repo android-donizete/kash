@@ -1,14 +1,15 @@
 typealias Producer<T> = Function0<T>
 typealias Builder<T> = T.() -> Unit
 
-fun startKash(builder: Builder<Kash>) =
-    Kash().apply(builder)
+fun startKash(builder: Builder<MutableKash>): Kash =
+    MutableKash().apply(builder)
 
-fun module(builder: Builder<Kash>) =
+fun module(builder: Builder<MutableKash>) =
     builder
 
 //inline to eliminate function call overhead
-inline fun <T> Producer<T>.toSingle() = SingleProducer(this)
+inline fun <T> Producer<T>.toSingle(): Producer<T> =
+    SingleProducer(this)
 
 class SingleProducer<T>(
     private val producer: Producer<T>
