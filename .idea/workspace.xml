@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="551e686f-dd2a-462a-a0f9-ed119acfea64" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Definition.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Definition.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ProducerWrapper.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ProducerWrapper.kt" afterDir="false" />
-    </list>
+    <list default="true" id="551e686f-dd2a-462a-a0f9-ed119acfea64" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

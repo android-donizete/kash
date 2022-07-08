@@ -4,11 +4,14 @@ class Kash {
     private val dependencies = hashMapOf<KClass<*>, Producer<*>>()
     private val history = linkedSetOf<KClass<*>>()
 
-    fun module(moduleBuilder: Builder<Module>) {
+    fun module(builder: Builder<Module>) {
         val module = Module(this)
-        moduleBuilder(module)
+        builder(module)
         dependencies.putAll(module.dependencies)
     }
+
+    inline operator fun <reified T : Any> invoke(): T = get()
+    inline fun <reified T : Any> get(): T = get(T::class)
 
     fun <T : Any> get(kClass: KClass<T>): T {
         if (kClass in history) {
@@ -35,6 +38,4 @@ class Kash {
         builder.append("${kClass.simpleName}")
         return builder.toString()
     }
-
-    inline fun <reified T : Any> get(): T = get(T::class)
 }

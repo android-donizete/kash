@@ -28,8 +28,8 @@ fun main(args: Array<String>) {
         module(module2)
     }
 
-    val car1 = kash.get<Car>()
-    val car2 = kash.get<Car>()
+    val car1 = kash<Car>()
+    val car2 = kash<Car>()
 
     car1()
     car2()
@@ -38,8 +38,8 @@ fun main(args: Array<String>) {
         println("I've got the same car!!!")
     }
 
-    val engine1 = kash.get<Engine>()
-    val engine2 = kash.get<Engine>()
+    val engine1 = kash<Engine>()
+    val engine2 = kash<Engine>()
 
     engine1()
     engine2()
