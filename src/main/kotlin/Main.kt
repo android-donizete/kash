@@ -13,16 +13,23 @@ class Car(
     }
 }
 
-class Engine {
+class Engine(
+    private val another: Another
+) {
     operator fun invoke() {
         println("Vrummmmmm!!!")
     }
 }
 
+class Another(
+    private val car: Car
+)
+
 fun main(args: Array<String>) {
     val module = module {
-        factory { Engine() }
+        factory { Engine(get()) }
         single { Car(get()) }
+        factory { Another(get()) }
     }
 
     val kash = startKash {
