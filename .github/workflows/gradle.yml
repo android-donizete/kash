@@ -9,9 +9,6 @@ on:
         options:
           - kash library
 
-permissions:
-  contents: read
-
 jobs:
   assets:
   
