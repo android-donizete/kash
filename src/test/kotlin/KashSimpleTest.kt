@@ -59,12 +59,8 @@ class KashSimpleTest {
     @Test
     fun shouldBeAbleToDetectCircularDependency() {
 
-        class Engine(
-            private val function: Function<Unit>
-        ) {
-            operator fun invoke() {
-                println("Vrummm!")
-            }
+        abstract class Engine {
+            abstract operator fun invoke()
         }
 
         class Car(
@@ -76,14 +72,22 @@ class KashSimpleTest {
             }
         }
 
-        class FunctionImpl(
+        class IDontCare(
             private val car: Car
-        ) : Function<Unit>
+        )
+
+        class EngineImpl(
+            val idc: IDontCare
+        ) : Engine() {
+            override fun invoke() {
+                println("Vrummm!")
+            }
+        }
 
         val module = module {
             factory { Car(get()) }
-            factory { Engine(get()) }
-            factory <Function<Unit>>{ FunctionImpl(get()) }
+            factory <Engine>{ EngineImpl(get()) }
+            factory { IDontCare(get()) }
         }
 
         val kash = startKash {
@@ -96,6 +100,12 @@ class KashSimpleTest {
         }
 
         println(exception)
+        /*
+                We have found a circular dependency.
+                Please revise your dependencies:
+                Car -> Engine -> IDontCare -> Car
+        */
+        //Beautiful. Isn't it?
     }
 
     @Test
@@ -120,7 +130,7 @@ class KashSimpleTest {
         }
 
         val module = module {
-            factoryOf(::EngineImpl, Binds(Engine::class))
+            factoryOf(::EngineImpl, Binds<Engine>())
             factoryOf(::Car)
         }
 
@@ -146,7 +156,7 @@ class KashSimpleTest {
         }
 
         val module = module {
-            singleOf(::EngineImpl, Binds(Engine::class))
+            singleOf(::EngineImpl, Binds<Engine>())
         }
 
         val kash = startKash {

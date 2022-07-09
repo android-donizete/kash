@@ -1,5 +1,3 @@
-import kotlin.reflect.KClass
-
 typealias Producer<Type> = Function0<Type>
 typealias Builder<Type> = Type.() -> Unit
 
@@ -23,17 +21,16 @@ class SingleProducer<Type>(
 inline fun <Type> Producer<Type>.toSingle(): Producer<Type> =
     SingleProducer(this)
 
-//I don't even know what am I doing
-data class Binds<out Type : Any>(
-    val clazz: KClass<@UnsafeVariance Type>
-)
+class Binds<out Type>
 
 class BindProducer<Bind, Type : Bind>(
-    private val producer: Producer<Type>
+    private val producer: Producer<Type>,
+    //only for type inference
+    private val unused: Binds<Bind>
 ) : Producer<Bind> {
     override fun invoke(): Bind = producer()
 }
 
 //inline to eliminate function call overhead
-inline fun <Bind, Type : Bind> Producer<Type>.toBind(): Producer<Bind> =
-    BindProducer(this)
+inline fun <Bind, Type : Bind> Producer<Type>.toBind(binds: Binds<Bind>): Producer<Bind> =
+    BindProducer(this, binds)

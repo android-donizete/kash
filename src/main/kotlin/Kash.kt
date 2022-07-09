@@ -15,43 +15,43 @@ class MutableKash : Kash() {
 
     inline fun <reified Type, reified Bind : Any> singleOf(
         noinline fn: Function0<Type>,
-        unused: Binds<Bind> = Binds(Type::class)
-    ) where Type : Bind = push({ fn() }.toBind<Bind, Type>().toSingle())
+        binds: Binds<Bind> = Binds<Type>()
+    ) where Type : Bind = push({ fn() }.toBind(binds).toSingle())
 
     inline fun <reified A, reified Type, reified Bind : Any> singleOf(
         noinline fn: Function1<A, Type>,
-        unused: Binds<Bind> = Binds(Type::class)
-    ) where Type : Bind = push({ fn(get()) }.toBind<Bind, Type>().toSingle())
+        binds: Binds<Bind> = Binds<Type>()
+    ) where Type : Bind = push({ fn(get()) }.toBind(binds).toSingle())
 
     inline fun <reified A, reified B, reified Type, reified Bind : Any> singleOf(
         noinline fn: Function2<A, B, Type>,
-        unused: Binds<Bind> = Binds(Type::class)
-    ) where Type : Bind = push({ fn(get(), get()) }.toBind<Bind, Type>().toSingle())
+        binds: Binds<Bind> = Binds<Type>()
+    ) where Type : Bind = push({ fn(get(), get()) }.toBind(binds).toSingle())
 
     inline fun <reified A, reified B, reified C, reified Type, reified Bind : Any> singleOf(
         noinline fn: Function3<A, B, C, Type>,
-        unused: Binds<Bind> = Binds(Type::class)
-    ) where Type : Bind = push({ fn(get(), get(), get()) }.toBind<Bind, Type>().toSingle())
+        binds: Binds<Bind> = Binds<Type>()
+    ) where Type : Bind = push({ fn(get(), get(), get()) }.toBind(binds).toSingle())
 
     inline fun <reified Type, reified Bind : Any> factoryOf(
         noinline fn: Function0<Type>,
-        unused: Binds<Bind> = Binds(Type::class)
-    ) where Type : Bind = push({ fn() }.toBind<Bind, Type>())
+        binds: Binds<Bind> = Binds<Type>()
+    ) where Type : Bind = push({ fn() }.toBind(binds))
 
     inline fun <reified A, reified Type, reified Bind : Any> factoryOf(
         noinline fn: Function1<A, Type>,
-        unused: Binds<Bind> = Binds(Type::class)
-    ) where Type : Bind = push({ fn(get()) }.toBind<Bind, Type>())
+        binds: Binds<Bind> = Binds<Type>()
+    ) where Type : Bind = push({ fn(get()) }.toBind(binds))
 
     inline fun <reified A, reified B, reified Type, reified Bind : Any> factoryOf(
         noinline fn: Function2<A, B, Type>,
-        unused: Binds<Bind> = Binds(Type::class)
-    ) where Type : Bind = push({ fn(get(), get()) }.toBind<Bind, Type>())
+        binds: Binds<Bind> = Binds<Type>()
+    ) where Type : Bind = push({ fn(get(), get()) }.toBind(binds))
 
     inline fun <reified A, reified B, reified C, reified Type, reified Bind : Any> factoryOf(
         noinline fn: Function3<A, B, C, Type>,
-        unused: Binds<Bind> = Binds(Type::class)
-    ) where Type : Bind = push({ fn(get(), get(), get()) }.toBind<Bind, Type>())
+        binds: Binds<Bind> = Binds<Type>()
+    ) where Type : Bind = push({ fn(get(), get(), get()) }.toBind(binds))
 
     inline fun <reified T : Any> push(noinline producer: Producer<T>) = push(T::class, producer)
 
