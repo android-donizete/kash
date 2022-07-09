@@ -116,7 +116,7 @@ abstract class Kash {
                 We have found a circular dependency.
                 Please revise your dependencies:
                 ${history(clazz)}
-            """
+                """
             )
         }
         history += clazz
