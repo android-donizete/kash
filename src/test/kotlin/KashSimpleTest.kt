@@ -86,7 +86,7 @@ class KashSimpleTest {
 
         val module = module {
             factory { Car(get()) }
-            factory <Engine>{ EngineImpl(get()) }
+            factory<Engine> { EngineImpl(get()) }
             factory { IDontCare(get()) }
         }
 
@@ -149,7 +149,23 @@ class KashSimpleTest {
             abstract operator fun invoke()
         }
 
-        class EngineImpl : Engine() {
+        class DepA
+        class DepB
+        class DepC
+        class DepD
+        class DepE
+        class DepF
+        class DepG
+
+        class EngineImpl(
+            private val depA: DepA,
+            private val depB: DepB,
+            private val depC: DepC,
+            private val depD: DepD,
+            private val depE: DepE,
+            private val depF: DepF,
+            private val depG: DepG
+        ) : Engine() {
             override fun invoke() {
                 println("Vrummm!")
             }
@@ -157,6 +173,13 @@ class KashSimpleTest {
 
         val module = module {
             singleOf(::EngineImpl, Binds<Engine>())
+            factoryOf(::DepA)
+            factoryOf(::DepB)
+            factoryOf(::DepC)
+            factoryOf(::DepD)
+            singleOf(::DepE)
+            singleOf(::DepF)
+            singleOf(::DepG)
         }
 
         val kash = startKash {

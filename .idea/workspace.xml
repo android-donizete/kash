@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="551e686f-dd2a-462a-a0f9-ed119acfea64" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Kash.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Kash.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/kotlin/KashSimpleTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/KashSimpleTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,7 +50,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;
   }
 }</component>
-  <component name="RunManager" selected="Gradle.KashSimpleTest">
+  <component name="RunManager" selected="Gradle.KashSimpleTest.shouldBeAbleToBindUsingDSLSingle">
     <configuration name="KashSimpleTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -151,10 +152,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.KashSimpleTest" />
         <item itemvalue="Gradle.KashSimpleTest.shouldBeAbleToBindUsingDSLSingle" />
-        <item itemvalue="Gradle.KashSimpleTest.shouldBeAbleToBindUsingDSLFactory" />
+        <item itemvalue="Gradle.KashSimpleTest" />
         <item itemvalue="Gradle.KashSimpleTest.shouldBeAbleToDetectCircularDependency" />
+        <item itemvalue="Gradle.KashSimpleTest.shouldBeAbleToBindUsingDSLFactory" />
         <item itemvalue="Kotlin.MainKt" />
       </list>
     </recent_temporary>
@@ -180,5 +181,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/src/test/kotlin/KashSimpleTest.kt</url>
+          <line>191</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
