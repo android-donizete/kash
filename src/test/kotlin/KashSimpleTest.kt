@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class KashSimpleTest {
     @Test
@@ -95,5 +96,66 @@ class KashSimpleTest {
         }
 
         println(exception)
+    }
+
+    @Test
+    fun shouldBeAbleToBindUsingDSLFactory() {
+        abstract class Engine {
+            abstract operator fun invoke()
+        }
+
+        class EngineImpl : Engine() {
+            override fun invoke() {
+                println("Vrummm!")
+            }
+        }
+
+        class Car(
+            val engine: Engine
+        ) {
+            operator fun invoke() {
+                println("I'm turning on")
+                engine()
+            }
+        }
+
+        val module = module {
+            factoryOf(::EngineImpl, Binds(Engine::class))
+            factoryOf(::Car)
+        }
+
+        val kash = startKash {
+            module(module)
+        }
+
+        val car: Car = assertDoesNotThrow(kash::invoke)
+
+        car()
+    }
+
+    @Test
+    fun shouldBeAbleToBindUsingDSLSingle() {
+        abstract class Engine {
+            abstract operator fun invoke()
+        }
+
+        class EngineImpl : Engine() {
+            override fun invoke() {
+                println("Vrummm!")
+            }
+        }
+
+        val module = module {
+            singleOf(::EngineImpl, Binds(Engine::class))
+        }
+
+        val kash = startKash {
+            module(module)
+        }
+
+        val engine1: Engine = assertDoesNotThrow(kash::invoke)
+        val engine2: Engine = assertDoesNotThrow(kash::invoke)
+
+        assertEquals(engine1, engine2)
     }
 }
