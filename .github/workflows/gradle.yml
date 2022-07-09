@@ -14,9 +14,13 @@ permissions:
 
 jobs:
   assets:
+  
     name: 'Publish new version kash'
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: read
+      packages: write
+      
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 11
@@ -25,14 +29,16 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
 
-    - name: Add permission to run command gradle
+      - name: Add permission to run command gradle
         run: chmod +x ./gradlew
 
-    - name: Generate new JAR output
+      - name: Generate new JAR output
         run: ./gradlew assemble
 
-    - name: Publish new version in maven
+      - name: Publish new version in maven
         run: ./gradlew publish
         env:
           ENV_KASH_USERNAME: ${{ github.actor }}
           ENV_KASH_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+          
+      
