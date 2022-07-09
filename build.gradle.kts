@@ -5,8 +5,7 @@ plugins {
     application
 }
 
-group = "com.poor"
-version = "1.0-SNAPSHOT"
+apply(from = "./tools/publish_setting.gradle.kts")
 
 repositories {
     mavenCentral()
