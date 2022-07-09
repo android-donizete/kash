@@ -1,7 +1,7 @@
 apply(plugin = "maven-publish")
 
 project.group = "com.kash"
-project.version = "0.0.3"
+project.version = "0.0.4"
 
 configure<PublishingExtension> {
     repositories {
