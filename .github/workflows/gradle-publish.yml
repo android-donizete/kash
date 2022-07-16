@@ -1,0 +1,47 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+# This workflow will build a package using Gradle and then publish it to GitHub packages when a release is created
+# For more information see: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#Publishing-using-gradle
+
+name: Publish new version kash
+
+on:
+  workflow_dispatch:
+    inputs:
+      choice:
+        type: choice
+        description: Deploy new Version
+        options:
+          - kash library
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
+        settings-path: ${{ github.workspace }} # location for the settings.xml file
+
+    - name: Add permission to run command gradle
+      run: chmod +x ./gradlew
+
+    - name: Generate new JAR output
+      run: ./gradlew assemble
+
+    - name: Publish new version in maven
+      run: ./gradlew publish
+      env:
+        ENV_KASH_USERNAME: ${{ github.actor }}
+        ENV_KASH_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
