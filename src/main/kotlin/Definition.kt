@@ -1,11 +1,13 @@
 typealias Producer<Type> = Function0<Type>
 typealias Builder<Type> = Type.() -> Unit
 
-fun startKash(builder: Builder<MutableKash>): Kash =
-    MutableKash().apply(builder)
+fun startKash(
+    builder: Builder<MutableKash>
+): Kash = MutableKash().apply(builder)
 
-fun module(builder: Builder<MutableKash>) =
-    builder
+fun module(
+    builder: Builder<MutableKash>
+) = builder
 
 class SingleProducer<Type>(
     private val producer: Producer<Type>
@@ -20,15 +22,3 @@ class SingleProducer<Type>(
 //inline to eliminate function call overhead
 inline fun <Type> Producer<Type>.toSingle(): Producer<Type> =
     SingleProducer(this)
-
-class Binds<out Type>
-
-class BindProducer<Bind, Type : Bind>(
-    private val producer: Producer<Type>
-) : Producer<Bind> {
-    override fun invoke(): Bind = producer()
-}
-
-//inline to eliminate function call overhead
-inline fun <Bind, Type : Bind> Producer<Type>.toBind(ignore: Binds<Bind>): Producer<Bind> =
-    BindProducer(this)

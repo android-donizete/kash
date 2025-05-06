@@ -1,9 +1,15 @@
 import kotlin.reflect.KClass
 
 class MutableKash : Kash() {
-    fun module(builder: Builder<MutableKash>) = builder(this)
+    fun modules(vararg builder: Builder<MutableKash>) = builder.forEach { it(this) }
 
-    fun modules(vararg builders: Builder<MutableKash>) = builders.forEach(::module)
+    fun <T : Any> push(clazz: KClass<T>, producer: Producer<T>) {
+        producers[clazz] = producer
+    }
+
+    inline fun <reified T : Any> push(
+        noinline producer: Producer<T>
+    ) = push(T::class, producer)
 
     inline fun <reified Type : Any> single(
         noinline producer: Producer<Type>
@@ -15,89 +21,83 @@ class MutableKash : Kash() {
 
     inline fun <reified Type, reified Bind : Any> singleOf(
         noinline fn: Function0<Type>,
-        binds: Binds<Bind> = Binds<Type>()
-    ) where Type : Bind = push({ fn() }.toBind(binds).toSingle())
+        binds: KClass<out Bind> = Type::class
+    ) where Type : Bind = single<Bind>(fn)
 
     inline fun <reified A, reified Type, reified Bind : Any> singleOf(
         noinline fn: Function1<A, Type>,
-        binds: Binds<Bind> = Binds<Type>()
-    ) where Type : Bind = push({ fn(get()) }.toBind(binds).toSingle())
+        binds: KClass<out Bind> = Type::class
+    ) where Type : Bind = single<Bind> { fn(get()) }
 
     inline fun <reified A, reified B, reified Type, reified Bind : Any> singleOf(
         noinline fn: Function2<A, B, Type>,
-        binds: Binds<Bind> = Binds<Type>()
-    ) where Type : Bind = push({ fn(get(), get()) }.toBind(binds).toSingle())
+        binds: KClass<out Bind> = Type::class
+    ) where Type : Bind = single<Bind> { fn(get(), get()) }
 
     inline fun <reified A, reified B, reified C, reified Type, reified Bind : Any> singleOf(
         noinline fn: Function3<A, B, C, Type>,
-        binds: Binds<Bind> = Binds<Type>()
-    ) where Type : Bind = push({ fn(get(), get(), get()) }.toBind(binds).toSingle())
+        binds: KClass<out Bind> = Type::class
+    ) where Type : Bind = single<Bind> { fn(get(), get(), get()) }
 
     inline fun <reified A, reified B, reified C, reified D, reified Type, reified Bind : Any> singleOf(
         noinline fn: Function4<A, B, C, D, Type>,
-        binds: Binds<Bind> = Binds<Type>()
-    ) where Type : Bind = push({ fn(get(), get(), get(), get()) }.toBind(binds).toSingle())
+        binds: KClass<out Bind> = Type::class
+    ) where Type : Bind = single<Bind> { fn(get(), get(), get(), get()) }
 
     inline fun <reified A, reified B, reified C, reified D, reified E, reified Type, reified Bind : Any> singleOf(
         noinline fn: Function5<A, B, C, D, E, Type>,
-        binds: Binds<Bind> = Binds<Type>()
-    ) where Type : Bind = push({ fn(get(), get(), get(), get(), get()) }.toBind(binds).toSingle())
+        binds: KClass<out Bind> = Type::class
+    ) where Type : Bind = single<Bind> { fn(get(), get(), get(), get(), get()) }
 
     inline fun <reified A, reified B, reified C, reified D, reified E, reified F, reified Type, reified Bind : Any> singleOf(
         noinline fn: Function6<A, B, C, D, E, F, Type>,
-        binds: Binds<Bind> = Binds<Type>()
-    ) where Type : Bind = push({ fn(get(), get(), get(), get(), get(), get()) }.toBind(binds).toSingle())
+        binds: KClass<out Bind> = Type::class
+    ) where Type : Bind = single<Bind> { fn(get(), get(), get(), get(), get(), get()) }
 
     inline fun <reified A, reified B, reified C, reified D, reified E, reified F, reified G, reified Type, reified Bind : Any> singleOf(
         noinline fn: Function7<A, B, C, D, E, F, G, Type>,
-        binds: Binds<Bind> = Binds<Type>()
-    ) where Type : Bind = push({ fn(get(), get(), get(), get(), get(), get(), get()) }.toBind(binds).toSingle())
+        binds: KClass<out Bind> = Type::class
+    ) where Type : Bind = single<Bind> { fn(get(), get(), get(), get(), get(), get(), get()) }
 
     inline fun <reified Type, reified Bind : Any> factoryOf(
         noinline fn: Function0<Type>,
-        binds: Binds<Bind> = Binds<Type>()
-    ) where Type : Bind = push({ fn() }.toBind(binds))
+        binds: KClass<out Bind> = Type::class
+    ) where Type : Bind = factory<Bind>(fn)
 
     inline fun <reified A, reified Type, reified Bind : Any> factoryOf(
         noinline fn: Function1<A, Type>,
-        binds: Binds<Bind> = Binds<Type>()
-    ) where Type : Bind = push({ fn(get()) }.toBind(binds))
+        binds: KClass<out Bind> = Type::class
+    ) where Type : Bind = factory<Bind> { fn(get()) }
 
     inline fun <reified A, reified B, reified Type, reified Bind : Any> factoryOf(
         noinline fn: Function2<A, B, Type>,
-        binds: Binds<Bind> = Binds<Type>()
-    ) where Type : Bind = push({ fn(get(), get()) }.toBind(binds))
+        binds: KClass<out Bind> = Type::class
+    ) where Type : Bind = factory<Bind> { fn(get(), get()) }
 
     inline fun <reified A, reified B, reified C, reified Type, reified Bind : Any> factoryOf(
         noinline fn: Function3<A, B, C, Type>,
-        binds: Binds<Bind> = Binds<Type>()
-    ) where Type : Bind = push({ fn(get(), get(), get()) }.toBind(binds))
+        binds: KClass<out Bind> = Type::class
+    ) where Type : Bind = factory<Bind> { fn(get(), get(), get()) }
 
     inline fun <reified A, reified B, reified C, reified D, reified Type, reified Bind : Any> factoryOf(
         noinline fn: Function4<A, B, C, D, Type>,
-        binds: Binds<Bind> = Binds<Type>()
-    ) where Type : Bind = push({ fn(get(), get(), get(), get()) }.toBind(binds))
+        binds: KClass<out Bind> = Type::class
+    ) where Type : Bind = factory<Bind> { fn(get(), get(), get(), get()) }
 
     inline fun <reified A, reified B, reified C, reified D, reified E, reified Type, reified Bind : Any> factoryOf(
         noinline fn: Function5<A, B, C, D, E, Type>,
-        binds: Binds<Bind> = Binds<Type>()
-    ) where Type : Bind = push({ fn(get(), get(), get(), get(), get()) }.toBind(binds))
+        binds: KClass<out Bind> = Type::class
+    ) where Type : Bind = factory<Bind> { fn(get(), get(), get(), get(), get()) }
 
     inline fun <reified A, reified B, reified C, reified D, reified E, reified F, reified Type, reified Bind : Any> factoryOf(
         noinline fn: Function6<A, B, C, D, E, F, Type>,
-        binds: Binds<Bind> = Binds<Type>()
-    ) where Type : Bind = push({ fn(get(), get(), get(), get(), get(), get()) }.toBind(binds))
+        binds: KClass<out Bind> = Type::class
+    ) where Type : Bind = factory<Bind> { fn(get(), get(), get(), get(), get(), get()) }
 
     inline fun <reified A, reified B, reified C, reified D, reified E, reified F, reified G, reified Type, reified Bind : Any> factoryOf(
         noinline fn: Function7<A, B, C, D, E, F, G, Type>,
-        binds: Binds<Bind> = Binds<Type>()
-    ) where Type : Bind = push({ fn(get(), get(), get(), get(), get(), get(), get()) }.toBind(binds))
-
-    inline fun <reified T : Any> push(noinline producer: Producer<T>) = push(T::class, producer)
-
-    fun <T : Any> push(clazz: KClass<T>, producer: Producer<T>) {
-        producers[clazz] = producer
-    }
+        binds: KClass<out Bind> = Type::class
+    ) where Type : Bind = factory<Bind> { fn(get(), get(), get(), get(), get(), get(), get()) }
 }
 
 abstract class Kash {

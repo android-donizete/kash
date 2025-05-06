@@ -17,7 +17,7 @@ class KashSimpleTest {
         }
 
         val kash = startKash {
-            module(module)
+            modules(module)
         }
 
         val car: Car = assertDoesNotThrow(kash::invoke)
@@ -48,7 +48,7 @@ class KashSimpleTest {
         }
 
         val kash = startKash {
-            module(module)
+            modules(module)
         }
 
         val car: Car = assertDoesNotThrow(kash::invoke)
@@ -91,7 +91,7 @@ class KashSimpleTest {
         }
 
         val kash = startKash {
-            module(module)
+            modules(module)
         }
 
         val exception = assertThrows<IllegalStateException> {
@@ -130,12 +130,12 @@ class KashSimpleTest {
         }
 
         val module = module {
-            factoryOf(::EngineImpl, Binds<Engine>())
+            factoryOf(::EngineImpl, Engine::class)
             factoryOf(::Car)
         }
 
         val kash = startKash {
-            module(module)
+            modules(module)
         }
 
         val car: Car = assertDoesNotThrow(kash::invoke)
@@ -172,7 +172,7 @@ class KashSimpleTest {
         }
 
         val module = module {
-            singleOf(::EngineImpl, Binds<Engine>())
+            singleOf(::EngineImpl, Engine::class)
             factoryOf(::DepA)
             factoryOf(::DepB)
             factoryOf(::DepC)
@@ -183,7 +183,7 @@ class KashSimpleTest {
         }
 
         val kash = startKash {
-            module(module)
+            modules(module)
         }
 
         val engine1: Engine = assertDoesNotThrow(kash::invoke)
