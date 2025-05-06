@@ -8,7 +8,7 @@ class KashBindTest {
         class Impl : Contract()
 
         val module = module {
-            singleOf(::Impl, Contract::class)
+            singleOf<Contract>(::Impl)
         }
 
         val kash = startKash {
@@ -30,7 +30,7 @@ class KashBindTest {
 
         val module = module {
             singleOf(::Param1)
-            singleOf(::Impl, Contract::class)
+            singleOf(::Impl binds Contract::class)
         }
 
         val kash = startKash {
@@ -55,7 +55,7 @@ class KashBindTest {
         val module = module {
             singleOf(::Param1)
             singleOf(::Param2)
-            singleOf(::Impl, Contract::class)
+            singleOf(::Impl binds Contract::class)
         }
 
         val kash = startKash {
@@ -83,7 +83,7 @@ class KashBindTest {
             singleOf(::Param1)
             singleOf(::Param2)
             singleOf(::Param3)
-            singleOf(::Impl, Contract::class)
+            singleOf(::Impl binds Contract::class)
         }
 
         val kash = startKash {
@@ -114,7 +114,7 @@ class KashBindTest {
             singleOf(::Param2)
             singleOf(::Param3)
             singleOf(::Param4)
-            singleOf(::Impl, Contract::class)
+            singleOf(::Impl binds Contract::class)
         }
 
         val kash = startKash {
@@ -148,7 +148,7 @@ class KashBindTest {
             singleOf(::Param3)
             singleOf(::Param4)
             singleOf(::Param5)
-            singleOf(::Impl, Contract::class)
+            singleOf(::Impl binds Contract::class)
         }
 
         val kash = startKash {
@@ -185,7 +185,7 @@ class KashBindTest {
             singleOf(::Param4)
             singleOf(::Param5)
             singleOf(::Param6)
-            singleOf(::Impl, Contract::class)
+            singleOf(::Impl binds Contract::class)
         }
 
         val kash = startKash {
@@ -225,7 +225,7 @@ class KashBindTest {
             singleOf(::Param5)
             singleOf(::Param6)
             singleOf(::Param7)
-            singleOf(::Impl, Contract::class)
+            singleOf(::Impl binds Contract::class)
         }
 
         val kash = startKash {

@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4f0a9e81-99ed-4f53-8950-7ee8436d3198" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Definition.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Definition.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/Kash.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Kash.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/kotlin/KashBindTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/KashBindTest.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/kotlin/KashSimpleTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/KashSimpleTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -54,6 +52,13 @@
       </state>
     </system>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -71,7 +76,16 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Gradle.Build kash.executor": "Run",
+    "Gradle.KashBindTest.dsl should bind the abstract object 1.executor": "Run",
+    "Gradle.KashBindTest.dsl should bind the abstract object 2.executor": "Run",
+    "Gradle.KashBindTest.dsl should bind the abstract object 3.executor": "Run",
+    "Gradle.KashBindTest.dsl should bind the abstract object 4.executor": "Run",
+    "Gradle.KashBindTest.dsl should bind the abstract object 5.executor": "Run",
+    "Gradle.KashBindTest.dsl should bind the abstract object 6.executor": "Run",
+    "Gradle.KashBindTest.dsl should bind the abstract object 7.executor": "Run",
+    "Gradle.KashBindTest.dsl should bind the abstract object 8.executor": "Run",
     "Gradle.KashBindTest.dsl should bind the outer object.executor": "Debug",
+    "Gradle.KashBindTest.executor": "Run",
     "Gradle.kash [assemble].executor": "Run",
     "Kotlin.MainKt.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
@@ -87,8 +101,8 @@
       <recent name="$PROJECT_DIR$/.idea" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.KashBindTest.dsl should bind the outer object">
-    <configuration name="KashBindTest.dsl should bind the outer object" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.KashBindTest">
+    <configuration name="KashBindTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -101,7 +115,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;KashBindTest.dsl should bind the outer object&quot;" />
+            <option value="&quot;KashBindTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -112,32 +126,109 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="kash [assemble]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="KashBindTest.dsl should bind the abstract object 1" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value="assemble" />
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;KashBindTest.dsl should bind the abstract object 1&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="KashBindTest.dsl should bind the abstract object 6" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;KashBindTest.dsl should bind the abstract object 6&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="KashBindTest.dsl should bind the abstract object 7" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;KashBindTest.dsl should bind the abstract object 7&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="KashBindTest.dsl should bind the abstract object 8" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;KashBindTest.dsl should bind the abstract object 8&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.KashBindTest.dsl should bind the outer object" />
-        <item itemvalue="Gradle.kash [assemble]" />
+        <item itemvalue="Gradle.KashBindTest" />
+        <item itemvalue="Gradle.KashBindTest.dsl should bind the abstract object 1" />
+        <item itemvalue="Gradle.KashBindTest.dsl should bind the abstract object 8" />
+        <item itemvalue="Gradle.KashBindTest.dsl should bind the abstract object 7" />
+        <item itemvalue="Gradle.KashBindTest.dsl should bind the abstract object 6" />
       </list>
     </recent_temporary>
   </component>
@@ -152,20 +243,6 @@
     <servers />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/main/kotlin/Kash.kt</url>
-          <line>110</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/main/kotlin/Kash.kt</url>
-          <line>96</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="java.util.HashMap$Node" memberName="value" />

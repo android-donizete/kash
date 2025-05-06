@@ -130,7 +130,7 @@ class KashSimpleTest {
         }
 
         val module = module {
-            factoryOf(::EngineImpl, Engine::class)
+            factoryOf<Engine>(::EngineImpl)
             factoryOf(::Car)
         }
 
@@ -172,7 +172,7 @@ class KashSimpleTest {
         }
 
         val module = module {
-            singleOf(::EngineImpl, Engine::class)
+            singleOf(::EngineImpl binds Engine::class)
             factoryOf(::DepA)
             factoryOf(::DepB)
             factoryOf(::DepC)
